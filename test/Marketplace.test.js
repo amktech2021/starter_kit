@@ -1,22 +1,23 @@
-const Marketplace = artifacts.require('./Marketplace.sol') // import the contract
+const Marketplace = artifacts.require('./Marketplace.sol');
+let marketplace; // Declare a separate variable for the instance
 
 contract('Marketplace', (accounts) => {
-    let Marketplace
     before(async () => {
-        Marketplace = await Marketplace.deployed()
-    })
+        marketplace = await Marketplace.deployed(); // Assign instance to lowercase variable
+    });
 
     describe('deployment', async () => {
         it('deploys successfully', async () => {
-            const address = await Marketplace.address
-            assert.notEqual(address, 0x0)
-            assert.notEqual(address, '')
-            assert.notEqual(address, null)
-            assert.notEqual(address, undefined)
-        })
-    })
+            const address = await marketplace.address;
+            assert.notEqual(address, 0x0);
+            assert.notEqual(address, '');
+            assert.notEqual(address, null);
+            assert.notEqual(address, undefined);
+        });
+    });
+
     it('has a name', async () => {
-        const name = await Marketplace.name()
-        assert.equal(name, 'Dapp University Marketplace')
-    })
-})
+        const name = await marketplace.name();
+        assert.equal(name, 'Dapp University Marketplace');
+    });
+});
